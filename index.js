@@ -15,13 +15,12 @@ function protochain(obj) {
 
 function getPrototypeOf(obj) {
   if (obj == null) return obj
-  if (isPrimitive(obj)) obj = new obj.constructor(obj)
+  if (isPrimitive(obj)) obj = Object(obj)
   return Object.getPrototypeOf(obj)
 }
 
 function isPrimitive(item) {
   return (
-    !(item instanceof Object) &&
-    Object.prototype.toString.call(item) !== '[object Object]'
+    item === null || typeof item !== 'object'
   )
 }

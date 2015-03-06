@@ -61,9 +61,10 @@ test('protochain', t => {
 
       class FancyPerson extends Person {}
       t.deepEquals(protochain(new FancyPerson()), [FancyPerson.prototype, Person.prototype, Object.prototype])
+      let foo = Symbol('foo')
+      t.deepEquals(protochain(foo), [ {}, {} ])
       t.end()
     })
-
   })
 
   t.end()
