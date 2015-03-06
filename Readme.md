@@ -1,5 +1,7 @@
 # protochain
 
+[![Build Status](https://travis-ci.org/timoxley/protochain.svg?branch=master)](https://travis-ci.org/timoxley/protochain)
+
 Get the prototype chain of an object or primitive as an Array.
 
 ## Why
