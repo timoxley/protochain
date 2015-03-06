@@ -26,10 +26,6 @@
     "babel": "^4.6.6",
     "tape": "^3.5.0"
   },
-  "dependencies": {
-    "babel": "^4.6.6",
-    "tape": "^3.5.0"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/timoxley/protochain.git"
