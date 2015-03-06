@@ -9,11 +9,33 @@
     "pretest": "npm run prepublish",
     "posttest": "rm protochain-test.js"
   },
-  "keywords": ["object", "inherit", "prototypical", "utility", "proto", "hierarchy", "ancestors", "grandparents", "parents"],
+  "keywords": [
+    "object",
+    "inherit",
+    "prototypical",
+    "utility",
+    "proto",
+    "hierarchy",
+    "ancestors",
+    "grandparents",
+    "parents"
+  ],
   "author": "Tim Oxley <secoif@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "babel": "^4.6.6",
     "tape": "^3.5.0"
-  }
+  },
+  "dependencies": {
+    "babel": "^4.6.6",
+    "tape": "^3.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/timoxley/protochain.git"
+  },
+  "bugs": {
+    "url": "https://github.com/timoxley/protochain/issues"
+  },
+  "homepage": "https://github.com/timoxley/protochain"
 }
