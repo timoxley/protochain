@@ -1,6 +1,6 @@
 {
   "name": "protochain",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Prototype chain of any value as an Array",
   "main": "protochain.js",
   "scripts": {
