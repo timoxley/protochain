@@ -6,40 +6,39 @@ import protochain from './'
 test('protochain', t => {
   t.test('finds correct prototype chain', t => {
     let obj = {}
-    t.deepEqual(protochain(obj), [Object.prototype])
-    t.deepEqual(protochain(Object.create(obj)), [obj, Object.prototype])
-    t.deepEqual(protochain(new Error('message')), [Error.prototype, Object.prototype])
-    t.deepEqual(protochain(new TypeError('message')), [TypeError.prototype, Error.prototype, Object.prototype])
-    t.deepEqual(protochain(new String()), [String.prototype, Object.prototype])
-    t.deepEqual(protochain(new Number()), [Number.prototype, Object.prototype])
-    t.deepEqual(protochain(new RegExp('abc')), [RegExp.prototype, Object.prototype])
-    t.deepEqual(protochain(new Date()), [Date.prototype, Object.prototype])
+    strictEqualArray(t, protochain(obj), [Object.prototype])
+    strictEqualArray(t, protochain(Object.create(obj)), [obj, Object.prototype])
+    strictEqualArray(t, protochain(new Error('message')), [Error.prototype, Object.prototype])
+    strictEqualArray(t, protochain(new TypeError('message')), [TypeError.prototype, Error.prototype, Object.prototype])
+    strictEqualArray(t, protochain(new String()), [String.prototype, Object.prototype])
+    strictEqualArray(t, protochain(new Number()), [Number.prototype, Object.prototype])
+    strictEqualArray(t, protochain(new RegExp('abc')), [RegExp.prototype, Object.prototype])
+    strictEqualArray(t, protochain(new Date()), [Date.prototype, Object.prototype])
     t.end()
   })
 
   t.test('null prototype is handled correctly', t => {
     let noProtoObject = Object.create(null)
-    t.deepEqual(protochain(noProtoObject), [])
-    t.deepEqual(protochain(Object.create(noProtoObject)), [noProtoObject])
+    strictEqualArray(t, protochain(noProtoObject), [])
+    strictEqualArray(t, protochain(Object.create(noProtoObject)), [noProtoObject])
     t.end()
   })
 
   t.test('non-object values cooerce to object counterparts correctly', t => {
-    t.deepEqual(protochain('abc'), [String.prototype, Object.prototype])
-    t.deepEqual(protochain(123), [Number.prototype, Object.prototype])
-    t.deepEqual(protochain(/abc/), [RegExp.prototype, Object.prototype])
-    t.deepEqual(protochain(true), [Boolean.prototype, Object.prototype])
-    t.deepEqual(protochain(false), [Boolean.prototype, Object.prototype])
-    // falsey values
-    t.deepEqual(protochain(''), [String.prototype, Object.prototype])
-    t.deepEqual(protochain(0), [Number.prototype, Object.prototype])
+    strictEqualArray(t, protochain('abc'), [String.prototype, Object.prototype])
+    strictEqualArray(t, protochain(123), [Number.prototype, Object.prototype])
+    strictEqualArray(t, protochain(/abc/), [RegExp.prototype, Object.prototype])
+    strictEqualArray(t, protochain(true), [Boolean.prototype, Object.prototype])
+    strictEqualArray(t, protochain(false), [Boolean.prototype, Object.prototype])
+    strictEqualArray(t, protochain(''), [String.prototype, Object.prototype])
+    strictEqualArray(t, protochain(0), [Number.prototype, Object.prototype])
     t.end()
   })
 
   t.test('null values produce empty list', t => {
-    t.deepEqual(protochain(), [])
-    t.deepEqual(protochain(undefined), [])
-    t.deepEqual(protochain(null), [])
+    strictEqualArray(t, protochain(), [])
+    strictEqualArray(t, protochain(undefined), [])
+    strictEqualArray(t, protochain(null), [])
     t.end()
   })
 
@@ -51,21 +50,27 @@ test('protochain', t => {
       }
       FancyPerson.prototype = Object.create(Person.prototype)
 
-      t.deepEquals(protochain(new Person()), [Person.prototype, Object.prototype])
-      t.deepEquals(protochain(new FancyPerson()), [FancyPerson.prototype, Person.prototype, Object.prototype])
+      strictEqualArray(t, protochain(new Person()), [Person.prototype, Object.prototype])
+      strictEqualArray(t, protochain(new FancyPerson()), [FancyPerson.prototype, Person.prototype, Object.prototype])
       t.end()
     })
     t.test('ES6', t => {
+      // note this will in-fact be compiled to ES5
       class Person {}
-      t.deepEquals(protochain(new Person()), [Person.prototype, Object.prototype])
+      strictEqualArray(t, protochain(new Person()), [Person.prototype, Object.prototype])
 
       class FancyPerson extends Person {}
-      t.deepEquals(protochain(new FancyPerson()), [FancyPerson.prototype, Person.prototype, Object.prototype])
+      strictEqualArray(t, protochain(new FancyPerson()), [FancyPerson.prototype, Person.prototype, Object.prototype])
       let foo = Symbol('foo')
-      t.deepEquals(protochain(foo), [ {}, {} ])
+      strictEqualArray(t, protochain(foo), [ Symbol.prototype, Object.prototype ])
       t.end()
     })
   })
 
   t.end()
 })
+
+function strictEqualArray(t, a, b) {
+  a.forEach((item, index) => t.strictEqual(a[index], b[index], `strictEqual at index ${index}`))
+  t.equal(a.length, b.length, 'same length')
+}
