@@ -70,7 +70,7 @@ test('protochain', t => {
   if (typeof Symbol !== 'undefined') {
     t.test('symbol support', t => {
       let foo = Symbol('foo')
-      strictEqualArray(t, protochain(foo), [ Symbol.prototype, Object.prototype ])
+      strictEqualArray(t, protochain(foo), [Symbol.prototype, Object.prototype])
       t.end()
     })
   }
@@ -78,7 +78,7 @@ test('protochain', t => {
   if (typeof Promise !== 'undefined') {
     t.test('promise support', t => {
       let foo = new Promise((Y, N) => Y())
-      strictEqualArray(t, protochain(foo), [ Promise.prototype, Object.prototype ])
+      strictEqualArray(t, protochain(foo), [Promise.prototype, Object.prototype])
       t.end()
     })
   }
