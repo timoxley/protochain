@@ -61,11 +61,19 @@ test('protochain', t => {
 
       class FancyPerson extends Person {}
       strictEqualArray(t, protochain(new FancyPerson()), [FancyPerson.prototype, Person.prototype, Object.prototype])
+      t.end()
+    })
+  })
+
+  // new native types which may not be supported
+
+  if (typeof Symbol !== 'undefined') {
+    t.test('symbol support', t => {
       let foo = Symbol('foo')
       strictEqualArray(t, protochain(foo), [ Symbol.prototype, Object.prototype ])
       t.end()
     })
-  })
+  }
 
   t.end()
 })
