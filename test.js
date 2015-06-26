@@ -63,6 +63,12 @@ test('protochain', t => {
       strictEqualArray(t, protochain(new FancyPerson()), [FancyPerson.prototype, Person.prototype, Object.prototype])
       t.end()
     })
+    t.test('functions', t => {
+      class Foo extends Function {}
+      class Bar extends Foo {}
+      strictEqualArray(t, protochain(new Bar()), [Bar.prototype, Foo.prototype, Function.prototype, Object.prototype])
+      t.end()
+    })
   })
 
   // new native types which may not be supported
