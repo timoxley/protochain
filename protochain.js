@@ -21,6 +21,6 @@ function getPrototypeOf(obj) {
 }
 
 function isPrimitive(item) {
-  return item === null || typeof item !== "object";
+  return item === null || typeof item !== "object" && typeof item !== "function";
 }
 
