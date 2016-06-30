@@ -1,3 +1,8 @@
+1.0.5 / 2016-06-30
+==================
+
+  * Fix default export for CommonJS compatibility. (@ljharb)
+
 1.0.4 / 2016-06-30
 ==================
 
