@@ -14,6 +14,9 @@ test('protochain', t => {
     strictEqualArray(t, protochain(new String()), [String.prototype, Object.prototype])
     strictEqualArray(t, protochain(new Number()), [Number.prototype, Object.prototype])
     /* eslint-enable no-new-wrappers */
+    /* eslint-disable no-new-func */
+    strictEqualArray(t, protochain(new Function()), [Function.prototype, Object.prototype])
+    /* eslint-enable no-new-func */
     strictEqualArray(t, protochain(new RegExp('abc')), [RegExp.prototype, Object.prototype])
     strictEqualArray(t, protochain(new Date()), [Date.prototype, Object.prototype])
     t.end()
@@ -38,6 +41,7 @@ test('protochain', t => {
   })
 
   t.test('non-object values cooerce to object counterparts correctly', t => {
+    strictEqualArray(t, protochain(function () {}), [Function.prototype, Object.prototype])
     strictEqualArray(t, protochain('abc'), [String.prototype, Object.prototype])
     strictEqualArray(t, protochain(123), [Number.prototype, Object.prototype])
     strictEqualArray(t, protochain(/abc/), [RegExp.prototype, Object.prototype])
