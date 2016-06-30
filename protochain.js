@@ -1,12 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = protochain;
-
-
-function protochain(obj) {
+module.exports = function protochain(obj) {
   var chain = [];
   var target = getPrototypeOf(obj);
   while (target) {
@@ -15,7 +9,7 @@ function protochain(obj) {
   }
 
   return chain;
-}
+};
 
 function getPrototypeOf(obj) {
   if (obj == null) return null;

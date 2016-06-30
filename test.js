@@ -1,7 +1,7 @@
 'use strict'
 
-import test from 'tape'
-import protochain from './'
+const test = require('tape')
+const protochain = require('./')
 
 test('protochain', t => {
   t.test('finds correct prototype chain', t => {

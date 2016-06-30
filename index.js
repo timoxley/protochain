@@ -1,8 +1,6 @@
 'use strict'
 
-export default protochain
-
-function protochain (obj) {
+module.exports = function protochain (obj) {
   const chain = []
   let target = getPrototypeOf(obj)
   while (target) {
