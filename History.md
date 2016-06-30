@@ -1,3 +1,12 @@
+1.0.4 / 2016-06-30
+==================
+
+  * Lint code with standard.
+  * Build with babel 6.
+  * Remove broken class extends Function test. Does not work with babel 6.
+  * Add more tests, including tests for collections & typed arrays.
+  * Mild internal refactoring.
+  * Update tape.
 
 1.0.3 / 2015-06-29
 ==================
