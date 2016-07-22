@@ -114,15 +114,18 @@ test('protochain', t => {
 
   if (typeof Uint8Array !== 'undefined') {
     t.test('typed array support', t => {
-      const TypedArray = Object.getPrototypeOf(Int8Array.prototype)
-      strictEqualArray(t, protochain(new Int8Array()), [Int8Array.prototype, TypedArray, Object.prototype])
-      strictEqualArray(t, protochain(new Uint8Array()), [Uint8Array.prototype, TypedArray, Object.prototype])
-      strictEqualArray(t, protochain(new Uint8ClampedArray()), [Uint8ClampedArray.prototype, TypedArray, Object.prototype])
-      strictEqualArray(t, protochain(new Int16Array()), [Int16Array.prototype, TypedArray, Object.prototype])
-      strictEqualArray(t, protochain(new Int32Array()), [Int32Array.prototype, TypedArray, Object.prototype])
-      strictEqualArray(t, protochain(new Uint32Array()), [Uint32Array.prototype, TypedArray, Object.prototype])
-      strictEqualArray(t, protochain(new Float32Array()), [Float32Array.prototype, TypedArray, Object.prototype])
-      strictEqualArray(t, protochain(new Float64Array()), [Float64Array.prototype, TypedArray, Object.prototype])
+      // on node 4.x, TypedArrays have Object.prototype as prototype.
+      const MaybeTypedArray = Object.getPrototypeOf(Int8Array.prototype)
+      const TypedArray = MaybeTypedArray !== Object.prototype ? MaybeTypedArray : null
+
+      strictEqualArray(t, protochain(new Int8Array()), [Int8Array.prototype, TypedArray, Object.prototype].filter(Boolean))
+      strictEqualArray(t, protochain(new Uint8Array()), [Uint8Array.prototype, TypedArray, Object.prototype].filter(Boolean))
+      strictEqualArray(t, protochain(new Uint8ClampedArray()), [Uint8ClampedArray.prototype, TypedArray, Object.prototype].filter(Boolean))
+      strictEqualArray(t, protochain(new Int16Array()), [Int16Array.prototype, TypedArray, Object.prototype].filter(Boolean))
+      strictEqualArray(t, protochain(new Int32Array()), [Int32Array.prototype, TypedArray, Object.prototype].filter(Boolean))
+      strictEqualArray(t, protochain(new Uint32Array()), [Uint32Array.prototype, TypedArray, Object.prototype].filter(Boolean))
+      strictEqualArray(t, protochain(new Float32Array()), [Float32Array.prototype, TypedArray, Object.prototype].filter(Boolean))
+      strictEqualArray(t, protochain(new Float64Array()), [Float64Array.prototype, TypedArray, Object.prototype].filter(Boolean))
       t.end()
     })
   }
