@@ -1,8 +1,10 @@
 # protochain
 
+Get the prototype chain of any JavaScript object or primitive as an Array.
+
 [![Build Status](https://travis-ci.org/timoxley/protochain.svg?branch=master)](https://travis-ci.org/timoxley/protochain)
 
-Get the prototype chain of any JavaScript object or primitive as an Array.
+[![NPM](https://nodei.co/npm-dl/protochain.png?months=3&height=3&chrome)](https://nodei.co/npm/protochain/)
 
 ## Installation
 
