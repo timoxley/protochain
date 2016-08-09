@@ -37,10 +37,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/timoxley/protochain.git"
+    "url": "git+https://github.com/timoxley/protochain.git"
   },
   "bugs": {
     "url": "https://github.com/timoxley/protochain/issues"
   },
-  "homepage": "https://github.com/timoxley/protochain"
+  "homepage": "https://github.com/timoxley/protochain",
+  "dependencies": {}
 }
